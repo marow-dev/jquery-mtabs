@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+	<script src="../src/jquery-mtabs.js"></script>
+	<script>
+		function loadMockup() {
+			return 'Nullam sollicitudin augue ullamcorper eros pharetra, at egestas elit viverra. Nullam facilisis augue a mauris auctor scelerisque. Praesent lobortis nibh vel tortor auctor pretium.';
+		}
+
+		$(document).ready(function () {
+			$('.tabs').mtabs();
+			$('#loadAjax').on('tabs:select', function () {
+				$(this).html(loadMockup());
+			});
+		});
+	</script>
+	<style>
+		.tabs_navigation_panel {
+		}
+		.tabs_navigation_panel .tabs_link {
+			border: 1px solid black;
+			padding: 5px;
+			border-radius: 10px 10px 0px 0px;
+			margin-right: 5px;
+			cursor: pointer;
+		}
+		.tabs_navigation_panel .tabs_link.active {
+			font-weight: bold;
+		}
+		.tabs_list {
+			margin-top: 5px;
+			padding: 5px;
+			border: 1px solid black;
+		}
+		.tabs_list .tabs_content {
+		}
+	</style>
+</head>
+<body>
+	<div class="tabs">
+		<div class="tabs_navigation_panel"></div>
+		<div class="tabs_list">
+			<div class="tabs_content" data-id="test1" data-title="TestA1">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget consequat ante. Mauris lorem felis, facilisis sollicitudin cursus sed, egestas ac ante. Integer malesuada imperdiet neque non tincidunt. Integer tristique dui sit amet felis sollicitudin semper. Praesent semper neque euismod, dictum quam et, ultrices velit. In non mi volutpat, vulputate dui sit amet, accumsan neque. Donec justo odio, blandit ac gravida id, ornare vel nisi. Praesent vitae venenatis sapien. Nullam sollicitudin augue ullamcorper eros pharetra, at egestas elit viverra. Nullam facilisis augue a mauris auctor scelerisque. Praesent lobortis nibh vel tortor auctor pretium.
+			</div>
+			<div class="tabs_content" data-id="test2" data-title="TestA2">
+				Curabitur pellentesque felis a pellentesque molestie. Nam ut sodales lacus. Nullam sed sapien a tellus scelerisque rutrum eget nec odio. Suspendisse nec consectetur augue. Proin sed lorem quis purus finibus placerat. Mauris sodales nec justo vitae blandit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in pulvinar odio.
+			</div>
+			<div class="tabs_content" data-id="test3" data-title="TestA3">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod est sit amet erat elementum, vitae dignissim purus lobortis. Nulla ornare nisi eu nibh feugiat consequat. Curabitur consequat est sit amet velit efficitur faucibus. Phasellus orci dolor, condimentum et tempor at, laoreet sit amet nunc. Ut et nulla libero. Suspendisse fringilla nulla et pellentesque consectetur. Curabitur tincidunt velit ligula, vel gravida sapien tincidunt a. Donec tempus odio eget turpis consequat bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at enim ut risus faucibus mattis sit amet bibendum mi.
+			</div>
+			<div id="loadAjax" class="tabs_content" data-id="test4" data-title="TestAjax" data-onselect="test_load"></div>
+		</div>
+	</div>
+</body>
+</html>
