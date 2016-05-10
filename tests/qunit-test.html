@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit basic example</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-1.23.1.css">
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/qunit/qunit-1.23.1.js"></script>
+  <script src="../src/jquery-mtabs.js"></script>
+  <script>
+      $(document).ready(function () {
+          $('.tabs').mtabs();
+      });
+  </script>
+  <script>
+    QUnit.test('tabs', function (assert) {
+        var tabs = $('.tabs_navigation_panel .tabs_link');
+        assert.equal(tabs.length, 3);
+        var tabActive = $('.tabs_navigation_panel .active').data('id');
+        assert.equal(tabActive, 'test1');
+    });
+    QUnit.test('user interaction', function (assert) {
+        $('.tabs_navigation_panel .tabs_link[data-id="test2"]').trigger('click');
+        var tabActive = $('.tabs_navigation_panel .active').data('id');
+        assert.equal(tabActive, 'test2');
+    });
+    QUnit.test('history', function (assert) {
+        $('.tabs_navigation_panel .tabs_link[data-id="test1"]').trigger('click');
+        assert.equal($('.tabs_navigation_panel .active').data('id'), 'test1');
+        $('.tabs_navigation_panel .tabs_link[data-id="test2"]').trigger('click');
+        assert.equal($('.tabs_navigation_panel .active').data('id'), 'test2');
+        $('.tabs_navigation_panel .tabs_link[data-id="test3"]').trigger('click');
+        assert.equal($('.tabs_navigation_panel .active').data('id'), 'test3');
+        window.history.go(-1);
+        assert.equal($('.tabs_navigation_panel .active').data('id'), 'test2');
+        window.history.go(-1);
+        assert.equal($('.tabs_navigation_panel .active').data('id'), 'test1');
+    });
+  </script>
+  <style>
+      .tabs_navigation_panel {
+      }
+      .tabs_navigation_panel .tabs_link {
+          border: 1px solid black;
+          padding: 5px;
+          border-radius: 10px 10px 0px 0px;
+          margin-right: 5px;
+          cursor: pointer;
+      }
+      .tabs_navigation_panel .tabs_link.active {
+          font-weight: bold;
+      }
+      .tabs_list {
+          margin-top: 5px;
+          padding: 5px;
+          border: 1px solid black;
+      }
+      .tabs_list .tabs_content {
+      }
+  </style>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+
+  <div style="padding-top: 20px;">
+      <div class="tabs">
+          <div class="tabs_navigation_panel"></div>
+          <div class="tabs_list">
+              <div class="tabs_content" data-id="test1" data-title="TestA1">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget consequat ante. Mauris lorem felis, facilisis sollicitudin cursus sed, egestas ac ante. Integer malesuada imperdiet neque non tincidunt. Integer tristique dui sit amet felis sollicitudin semper. Praesent semper neque euismod, dictum quam et, ultrices velit. In non mi volutpat, vulputate dui sit amet, accumsan neque. Donec justo odio, blandit ac gravida id, ornare vel nisi. Praesent vitae venenatis sapien. Nullam sollicitudin augue ullamcorper eros pharetra, at egestas elit viverra. Nullam facilisis augue a mauris auctor scelerisque. Praesent lobortis nibh vel tortor auctor pretium.
+              </div>
+              <div class="tabs_content" data-id="test2" data-title="TestA2">
+                  Curabitur pellentesque felis a pellentesque molestie. Nam ut sodales lacus. Nullam sed sapien a tellus scelerisque rutrum eget nec odio. Suspendisse nec consectetur augue. Proin sed lorem quis purus finibus placerat. Mauris sodales nec justo vitae blandit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in pulvinar odio.
+              </div>
+              <div class="tabs_content" data-id="test3" data-title="TestA3">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod est sit amet erat elementum, vitae dignissim purus lobortis. Nulla ornare nisi eu nibh feugiat consequat. Curabitur consequat est sit amet velit efficitur faucibus. Phasellus orci dolor, condimentum et tempor at, laoreet sit amet nunc. Ut et nulla libero. Suspendisse fringilla nulla et pellentesque consectetur. Curabitur tincidunt velit ligula, vel gravida sapien tincidunt a. Donec tempus odio eget turpis consequat bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at enim ut risus faucibus mattis sit amet bibendum mi.
+              </div>
+          </div>
+      </div>
+  </div>
+</body>
+</html>
